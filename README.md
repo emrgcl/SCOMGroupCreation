@@ -1,7 +1,7 @@
 # SCOM Group Creation
 This script is just a wrapper to [Kevin Holman](https://kevinholman.com/)'s solution mentioned in [Explicit Group Membership in SCOM using PowerShell](https://kevinholman.com/2021/09/29/explicit-group-membership-in-scom-using-powershell/). 
 
-Using my script you can maintain your explict group memberships by just maintaining a psd file explaiened [here](#groupconfig.psd1-explained)
+Using my script you can maintain your explict group memberships by just maintaining a psd file explaiened [here](#groupconfig-explained)
 
 # Prerequisites
 - OperationsManager Console installed.
@@ -20,7 +20,7 @@ Using my script you can maintain your explict group memberships by just maintain
 | ManagementServer | Management Server Name.                          |
 | LogfilePath      | Path to Log file                                 |
 
-## GroupConfig.Psd1 Explained
+## GroupConfig Explained
 
 The psd file contaisn GroupIDs as keys (left side) and a hashtable containing the MPName which should be fullname and COmputer list array.
 The MPName must be part of the GroupID.
