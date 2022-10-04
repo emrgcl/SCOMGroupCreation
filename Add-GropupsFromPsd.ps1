@@ -66,15 +66,17 @@ finally {
 $GroupNames = $Config.Keys
 Foreach ($GroupName in $GroupNames) {
 # Get the current state of each group
-$CurrentMembers = (Get-SCOMGroup | where {$_.Fullname -eq $GroupName} | Get-SCOMClassInstance).DisplayName
+$CurrentMembers = @((Get-SCOMGroup | where {$_.Fullname -eq $GroupName} | Get-SCOMClassInstance).DisplayName)
 # set the -ComputersToRemove the servers to be removed from each group 
 # set the --ComputersToAdd for the servers
+if($CurrentMembers.count -gt 0){
 $ObjectsToRemove = (Compare-Object -ReferenceObject $Config.$GroupName.Computers -DifferenceObject $CurrentMembers | Where-Object {$_.Sideindicator -eq '=>'}).Inputobject
-
+$ComputersToRemove = $ObjectsToRemove -join ','
+}
 $GroupID = $GroupName
 $ManagementPackID = $Config.$GroupName.MPName
 $ComputersToAdd = $Config.$GroupName.Computers -join ','
-$ComputersToRemove = $ObjectsToRemove -join ','
+
 if([string]::IsNullOrEmpty($ComputersToRemove))
 {
         $ComputersToRemove = ''
